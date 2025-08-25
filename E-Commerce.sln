@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{487E1C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dashboard", "Dashboard", "{1A20834E-0C0E-429D-8159-3487B76962CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-Commerce.APIs.Controller", "E-Commerce.APIs.Controller\E-Commerce.APIs.Controller.csproj", "{5C339908-6EBA-4AEB-AF41-EED02FCB7B6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{F1AC78B4-95DE-4852-92D5-310124F22FC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1AC78B4-95DE-4852-92D5-310124F22FC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1AC78B4-95DE-4852-92D5-310124F22FC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C339908-6EBA-4AEB-AF41-EED02FCB7B6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C339908-6EBA-4AEB-AF41-EED02FCB7B6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C339908-6EBA-4AEB-AF41-EED02FCB7B6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C339908-6EBA-4AEB-AF41-EED02FCB7B6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,5 +82,9 @@ Global
 		{D3148281-2BF3-42AD-A95B-8106E4191ACD} = {A8F4E5ED-EBC3-42E9-BF5F-177E71B15A43}
 		{487E1C7A-C6EA-4FF7-BEF9-69CCD2DDFEEE} = {D3148281-2BF3-42AD-A95B-8106E4191ACD}
 		{1A20834E-0C0E-429D-8159-3487B76962CA} = {D3148281-2BF3-42AD-A95B-8106E4191ACD}
+		{5C339908-6EBA-4AEB-AF41-EED02FCB7B6D} = {EF8F7AB0-02C7-4A24-8F44-0A2D5BD27755}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B2B7D937-3CB0-4227-ADB8-EF888BB85979}
 	EndGlobalSection
 EndGlobal

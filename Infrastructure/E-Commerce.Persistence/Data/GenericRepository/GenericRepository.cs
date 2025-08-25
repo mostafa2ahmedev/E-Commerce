@@ -1,6 +1,6 @@
 ﻿using E_Commerce.Domain.Common;
 using E_Commerce.Domain.Contracts;
-
+using E_Commerce.Domain.Entities.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +20,14 @@ namespace E_Commerce.Persistence.Data.GenericRepository
         }
         public async Task<IEnumerable<TEntity>> GetAllAsync(bool withTracking = false)
         {
-   
-           return  withTracking? 
+            if(typeof(TEntity) == typeof(Product))
+                return withTracking ?
+                  (IEnumerable <TEntity>) await _storeDbContext.Set<Product>().Include(P => P.Brand).Include(P=>P.Category).ToListAsync()
+                 :
+                  (IEnumerable <TEntity>) await _storeDbContext.Set<Product>().Include(P => P.Brand).Include(P => P.Category).AsNoTracking().ToListAsync();
+
+
+            return withTracking ? 
                    await _storeDbContext.Set<TEntity>().ToListAsync()
                    :
                    await _storeDbContext.Set<TEntity>().AsNoTracking().ToListAsync();
@@ -31,7 +37,9 @@ namespace E_Commerce.Persistence.Data.GenericRepository
 
         public async Task<TEntity?> GetAsync(TKey id)
         {
-          return await  _storeDbContext.Set<TEntity>().FindAsync(id);
+            if (typeof(TEntity) == typeof(Product))
+                return (TEntity) await _storeDbContext.Set<Product>().Where(P=>P.Id.Equals(id)).Include(P => P.Brand).Include(P => P.Category);
+            return await  _storeDbContext.Set<TEntity>().FindAsync(id);
         }
 
         public async Task AddAsync(TEntity entity)

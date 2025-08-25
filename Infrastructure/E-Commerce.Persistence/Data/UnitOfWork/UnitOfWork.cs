@@ -4,7 +4,7 @@ using E_Commerce.Persistence.Data;
 using E_Commerce.Persistence.Data.GenericRepository;
 using System.Collections.Concurrent;
 
-namespace E_Commerce.Persistence.UnitOfWork
+namespace E_Commerce.Persistence.Data.UnitOfWork
 {
     internal class UnitOfWork : IUnitOfWork
     {

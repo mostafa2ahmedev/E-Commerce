@@ -7,6 +7,7 @@
     "PictureUrl": "images/products/ItalianChickenMarinade.png",
     "TypeId": 1,
     "BrandId": 1,
+    "CategoryId": 1,
     "CreatedBy": "1",
     "LastModifiedBy": "1"
   },
@@ -18,6 +19,7 @@
     "PictureUrl": "images/products/ChickenMarsala.png",
     "TypeId": 1,
     "BrandId": 1,
+    "CategoryId": 2,
     "CreatedBy": "1",
     "LastModifiedBy": "1"
   },
@@ -29,6 +31,7 @@
     "PictureUrl": "images/products/HeartyVegetableLasagna.png",
     "TypeId": 1,
     "BrandId": 2,
+    "CategoryId": 3,
     "CreatedBy": "1",
     "LastModifiedBy": "1"
   },
@@ -40,6 +43,7 @@
     "PictureUrl": "images/products/CheesyVegetableLasagna.png",
     "TypeId": 1,
     "BrandId": 2,
+    "CategoryId": 4,
     "CreatedBy": "1",
     "LastModifiedBy": "1"
   },
@@ -51,6 +55,7 @@
     "PictureUrl": "images/products/PastaSalad.png",
     "TypeId": 1,
     "BrandId": 4,
+    "CategoryId": 1,
     "CreatedBy": "1",
     "LastModifiedBy": "1"
   },
@@ -62,6 +67,7 @@
     "PictureUrl": "images/products/ItalianWeddingSoup.png",
     "TypeId": 1,
     "BrandId": 5,
+    "CategoryId": 2,
     "CreatedBy": "1",
     "LastModifiedBy": "1"
   },
@@ -73,6 +79,7 @@
     "PictureUrl": "images/products/VegetarianRefriedBeans.png",
     "TypeId": 2,
     "BrandId": 2,
+    "CategoryId": 3,
     "CreatedBy": "1",
     "LastModifiedBy": "1"
   },
@@ -84,6 +91,7 @@
     "PictureUrl": "images/products/PepperPasta.png",
     "TypeId": 2,
     "BrandId": 4,
+    "CategoryId": 4,
     "CreatedBy": "1",
     "LastModifiedBy": "1"
   },
@@ -95,6 +103,7 @@
     "PictureUrl": "images/products/CreamyGochujangTortellini.png",
     "TypeId": 2,
     "BrandId": 4,
+    "CategoryId": 1,
     "CreatedBy": "1",
     "LastModifiedBy": "1"
   },
@@ -106,6 +115,7 @@
     "PictureUrl": "images/products/ShrimpEggFooYoung.png",
     "TypeId": 4,
     "BrandId": 3,
+    "CategoryId": 2,
     "CreatedBy": "1",
     "LastModifiedBy": "1"
   },
@@ -117,6 +127,7 @@
     "PictureUrl": "images/products/Congee.png",
     "TypeId": 4,
     "BrandId": 3,
+    "CategoryId": 3,
     "CreatedBy": "1",
     "LastModifiedBy": "1"
   },
@@ -128,6 +139,7 @@
     "PictureUrl": "images/products/HaluskiNoodles.png",
     "TypeId": 4,
     "BrandId": 4,
+    "CategoryId": 4,
     "CreatedBy": "1",
     "LastModifiedBy": "1"
   },
@@ -139,6 +151,7 @@
     "PictureUrl": "images/products/ChickenTeriyakiNoodles.png",
     "TypeId": 4,
     "BrandId": 4,
+    "CategoryId": 1,
     "CreatedBy": "1",
     "LastModifiedBy": "1"
   },
@@ -150,6 +163,7 @@
     "PictureUrl": "images/products/Kulfi.png",
     "TypeId": 3,
     "BrandId": 6,
+    "CategoryId": 2,
     "CreatedBy": "1",
     "LastModifiedBy": "1"
   },
@@ -161,6 +175,7 @@
     "PictureUrl": "images/products/CrispyVegetablePakoras.png",
     "TypeId": 3,
     "BrandId": 2,
+    "CategoryId": 3,
     "CreatedBy": "1",
     "LastModifiedBy": "1"
   },
@@ -172,6 +187,7 @@
     "PictureUrl": "images/products/VegetarianKorma.png",
     "TypeId": 3,
     "BrandId": 2,
+    "CategoryId": 4,
     "CreatedBy": "1",
     "LastModifiedBy": "1"
   },
@@ -183,6 +199,7 @@
     "PictureUrl": "images/products/TandooriChicken.png",
     "TypeId": 3,
     "BrandId": 1,
+    "CategoryId": 1,
     "CreatedBy": "1",
     "LastModifiedBy": "1"
   },
@@ -194,6 +211,7 @@
     "PictureUrl": "images/products/ChickenTikkaMasala.png",
     "TypeId": 3,
     "BrandId": 1,
+    "CategoryId": 2,
     "CreatedBy": "1",
     "LastModifiedBy": "1"
   }
