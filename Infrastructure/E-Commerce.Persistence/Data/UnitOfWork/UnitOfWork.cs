@@ -1,5 +1,5 @@
 ﻿using E_Commerce.Domain.Common;
-using E_Commerce.Domain.Contracts;
+using E_Commerce.Domain.Contracts.Persistence;
 using E_Commerce.Persistence.Data;
 using E_Commerce.Persistence.Data.GenericRepository;
 using System.Collections.Concurrent;

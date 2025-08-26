@@ -2,7 +2,7 @@
 using E_Commerce.Application.Services.Contracts;
 using E_Commerce.Application.Services.Contracts.Products;
 using E_Commerce.Application.Services.Products;
-using E_Commerce.Domain.Contracts;
+using E_Commerce.Domain.Contracts.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;

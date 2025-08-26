@@ -1,4 +1,4 @@
-﻿using E_Commerce.Domain.Contracts;
+﻿using E_Commerce.Domain.Contracts.Persistence;
 using E_Commerce.Domain.Entities.Products;
 using System;
 using System.Collections.Generic;

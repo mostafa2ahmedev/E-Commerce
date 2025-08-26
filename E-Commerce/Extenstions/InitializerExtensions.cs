@@ -1,4 +1,4 @@
-﻿using E_Commerce.Domain.Contracts;
+﻿using E_Commerce.Domain.Contracts.Persistence;
 
 namespace E_Commerce.Extensions
 {

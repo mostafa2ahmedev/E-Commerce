@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using E_Commerce.Application.Services.Common;
 using E_Commerce.Application.Services.Contracts.Products;
 using E_Commerce.Application.Services.DTO.Products;
-using E_Commerce.Domain.Contracts;
+using E_Commerce.Domain.Contracts.Persistence;
+using E_Commerce.Domain.Contracts.Specifications;
+using E_Commerce.Domain.Contracts.Specifications.Products;
 using E_Commerce.Domain.Entities.Products;
 using System;
 using System.Collections.Generic;
@@ -21,15 +24,27 @@ namespace E_Commerce.Application.Services.Products
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<ProductToReturnDto>> GetProductsAsync()
+        public async Task<Pagination<ProductToReturnDto>> GetProductsAsync(ProductSpecParams SpecParams)
         {
-            var products=   await  _unitOfWork.GetRepository<Product,int>().GetAllAsync();
+            var spec = new ProductWithBrandAndCategorySpecifications(
+                SpecParams.Sort, SpecParams.BrandId, SpecParams.CategoryId, SpecParams.PageSize, SpecParams.PageIndex,SpecParams.Search
+                );
+            var products=   await  _unitOfWork.GetRepository<Product,int>().GetAllAsyncWithSpec(spec);
             var productsToReturn = _mapper.Map<IEnumerable<ProductToReturnDto>>(products);
-            return productsToReturn;
+
+            var countSpec = new ProductWithFilterationForCountSpecifications(
+             SpecParams.BrandId, SpecParams.CategoryId
+                 );
+
+            var count = await _unitOfWork.GetRepository<Product, int>().GetCountAsync(countSpec);
+            return new Pagination<ProductToReturnDto>(SpecParams.PageIndex, SpecParams.PageSize, count) {
+                Data = productsToReturn,
+            };
         }
         public async Task<ProductToReturnDto> GetProductAsync(int id)
         {
-            var product = await _unitOfWork.GetRepository<Product, int>().GetAsync(id);
+            var spec = new ProductWithBrandAndCategorySpecifications(id);
+            var product = await _unitOfWork.GetRepository<Product, int>().GetAsyncWithSpec(spec);
             var productToReturn = _mapper.Map<ProductToReturnDto>(product);
             return productToReturn;
         }

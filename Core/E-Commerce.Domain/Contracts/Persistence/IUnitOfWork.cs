@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Commerce.Domain.Contracts
+namespace E_Commerce.Domain.Contracts.Persistence
 {
     public interface IUnitOfWork : IAsyncDisposable
     {

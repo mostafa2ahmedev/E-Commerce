@@ -16,7 +16,8 @@ namespace E_Commerce.Application
 
             //services.AddAutoMapper(Mapper => Mapper.AddProfile(new MappingProfile()));
             services.AddScoped(typeof(IProductService), typeof(ProductService));
-            services.AddAutoMapper(Mapper => Mapper.AddProfile<MappingProfile>());
+            services.AddAutoMapper(mapper => mapper.AddProfile(new MappingProfile()));
+            services.AddScoped(typeof(ProductPictureUrlResolver));
             services.AddScoped(typeof(IServiceManager), typeof(ServiceManager));
 
             return services;
