@@ -1,4 +1,5 @@
-﻿using E_Commerce.Application.Services.Common;
+﻿using E_Commerce.APIs.Controller.Errors;
+using E_Commerce.Application.Services.Common;
 using E_Commerce.Application.Services.Contracts;
 using E_Commerce.Application.Services.DTO.Products;
 using E_Commerce.Controllers;
@@ -29,6 +30,7 @@ namespace E_Commerce.APIs.Controller.Controllers.Products
 
             var products = await _serviceManager.ProductService.GetProductsAsync(productSpecParams);
             return Ok(products);
+       
         }
         [HttpGet("{id:int}")]
 
@@ -37,8 +39,8 @@ namespace E_Commerce.APIs.Controller.Controllers.Products
 
             var product = await _serviceManager.ProductService.GetProductAsync(id);
 
-            if(product is null)
-                return NotFound();
+            //if(product is null)
+            //    return NotFound(new ApiResponse(401,$"The Product with id:{id} is not found."));
 
             return Ok(product);
         }

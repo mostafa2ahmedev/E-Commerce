@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using E_Commerce.Application.Common.Exceptions;
 using E_Commerce.Application.Services.Common;
 using E_Commerce.Application.Services.Contracts.Products;
 using E_Commerce.Application.Services.DTO.Products;
@@ -32,9 +33,7 @@ namespace E_Commerce.Application.Services.Products
             var products=   await  _unitOfWork.GetRepository<Product,int>().GetAllAsyncWithSpec(spec);
             var productsToReturn = _mapper.Map<IEnumerable<ProductToReturnDto>>(products);
 
-            var countSpec = new ProductWithFilterationForCountSpecifications(
-             SpecParams.BrandId, SpecParams.CategoryId
-                 );
+            var countSpec = new ProductWithFiltrationForCountSpecifications(SpecParams.BrandId, SpecParams.CategoryId, SpecParams.Search);
 
             var count = await _unitOfWork.GetRepository<Product, int>().GetCountAsync(countSpec);
             return new Pagination<ProductToReturnDto>(SpecParams.PageIndex, SpecParams.PageSize, count) {
@@ -46,6 +45,9 @@ namespace E_Commerce.Application.Services.Products
             var spec = new ProductWithBrandAndCategorySpecifications(id);
             var product = await _unitOfWork.GetRepository<Product, int>().GetAsyncWithSpec(spec);
             var productToReturn = _mapper.Map<ProductToReturnDto>(product);
+
+            if (productToReturn is null)
+                throw new NotFoundException("product",id);
             return productToReturn;
         }
         public async Task<IEnumerable<BrandToReturnDto>> GetBrandsAsync()
