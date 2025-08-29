@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using E_Commerce.Application.Services.Basket;
 using E_Commerce.Application.Services.Contracts;
+using E_Commerce.Application.Services.Contracts.Basket;
 using E_Commerce.Application.Services.Contracts.Products;
 using E_Commerce.Application.Services.Products;
+using E_Commerce.Domain.Contracts.Infrastructure;
 using E_Commerce.Domain.Contracts.Persistence;
 using System;
 using System.Collections.Generic;
@@ -14,13 +17,15 @@ namespace E_Commerce.Application.Services
     internal class ServiceManager : IServiceManager
     {
         public readonly Lazy<IProductService> _productService;
+        public readonly Lazy<IBasketService> _basketService;
         public IProductService ProductService => _productService.Value;
 
+        public IBasketService BasketService => _basketService.Value;
 
-        public ServiceManager(IUnitOfWork unitOfWork,IMapper mapper)
+        public ServiceManager(IUnitOfWork unitOfWork,IMapper mapper, Func<IBasketService> basketServiceFactory)
         {
             _productService = new Lazy<IProductService>(() => new ProductService(unitOfWork, mapper));
-
+            _basketService = new Lazy<IBasketService>(basketServiceFactory,true);
         }
     }
 }

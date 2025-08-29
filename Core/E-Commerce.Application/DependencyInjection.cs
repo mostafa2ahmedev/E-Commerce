@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using E_Commerce.Application.Mapping;
 using E_Commerce.Application.Services;
+using E_Commerce.Application.Services.Basket;
 using E_Commerce.Application.Services.Contracts;
+using E_Commerce.Application.Services.Contracts.Basket;
 using E_Commerce.Application.Services.Contracts.Products;
 using E_Commerce.Application.Services.Products;
 using E_Commerce.Domain.Contracts;
-
+using E_Commerce.Domain.Contracts.Infrastructure;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace E_Commerce.Application
@@ -19,6 +22,21 @@ namespace E_Commerce.Application
             services.AddAutoMapper(mapper => mapper.AddProfile(new MappingProfile()));
             services.AddScoped(typeof(ProductPictureUrlResolver));
             services.AddScoped(typeof(IServiceManager), typeof(ServiceManager));
+
+            services.AddScoped(typeof(IBasketService), typeof(BasketService));
+
+            //services.AddScoped(typeof(Func<IBasketService>), typeof(Func<BasketService>));
+
+            services.AddScoped(typeof(Func<IBasketService>), (serviceProdiver) =>
+            {
+
+                var mapper = serviceProdiver.GetRequiredService<IMapper>();
+            //var configuration = serviceProdiver.GetRequiredService<IConfiguration>();
+            var basketRepository = serviceProdiver.GetRequiredService<IBasketRepository>();
+            return () => new BasketService(basketRepository, mapper);
+            //return new BasketService(basketRepository, mapper);
+
+        });
 
             return services;
 

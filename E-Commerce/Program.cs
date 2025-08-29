@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using E_Commerce.APIs.Controller.Errors;
 using E_Commerce.MiddleWares;
+using E_Commerce.Infrastructure;
 
 namespace E_Commerce
 {
@@ -57,6 +58,7 @@ namespace E_Commerce
 
             builder.Services.AddPersistenceServices(builder.Configuration);
             builder.Services.AddApplicationServices();
+            builder.Services.AddInfrastructureServices(builder.Configuration);
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
