@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Commerce.Domain.Contracts.Persistence
+namespace E_Commerce.Domain.Contracts.Persistence.DbInitializer
 {
-    public interface IStoreContextInitializer
+    public interface IDbInitializer
     {
         Task InitializeAsync();
         Task SeedAsync();

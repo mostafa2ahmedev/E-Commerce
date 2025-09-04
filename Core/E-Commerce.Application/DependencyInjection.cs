@@ -27,16 +27,10 @@ namespace E_Commerce.Application
 
             //services.AddScoped(typeof(Func<IBasketService>), typeof(Func<BasketService>));
 
-            services.AddScoped(typeof(Func<IBasketService>), (serviceProdiver) =>
+            services.AddScoped(typeof(Func<IBasketService>), (serviceProvider) =>
             {
-
-                var mapper = serviceProdiver.GetRequiredService<IMapper>();
-            //var configuration = serviceProdiver.GetRequiredService<IConfiguration>();
-            var basketRepository = serviceProdiver.GetRequiredService<IBasketRepository>();
-            return () => new BasketService(basketRepository, mapper);
-            //return new BasketService(basketRepository, mapper);
-
-        });
+            return () => serviceProvider.GetRequiredService<IBasketService>();
+             });
 
             return services;
 

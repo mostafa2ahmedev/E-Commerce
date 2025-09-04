@@ -1,10 +1,10 @@
 ﻿using E_Commerce.Domain.Common;
 using E_Commerce.Domain.Contracts.Persistence;
 using E_Commerce.Persistence.Data;
-using E_Commerce.Persistence.Data.GenericRepository;
+using E_Commerce.Persistence.GenericRepository;
 using System.Collections.Concurrent;
 
-namespace E_Commerce.Persistence.Data.UnitOfWork
+namespace E_Commerce.Persistence.UnitOfWorks
 {
     internal class UnitOfWork : IUnitOfWork
     {

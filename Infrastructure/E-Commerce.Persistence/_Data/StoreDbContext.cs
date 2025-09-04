@@ -18,10 +18,13 @@ namespace E_Commerce.Persistence.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-           
+
 
             //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AssemblyInformation).Assembly);
+
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AssemblyInformation).Assembly, type =>
+            type.Namespace!.Contains("E_Commerce.Persistence.Data.Config")
+            );
         }
     }
 }

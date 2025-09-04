@@ -1,7 +1,7 @@
 ﻿
 namespace E_Commerce.Domain.Entities.Products
 {
-    public class Product : BaseEntity<int>
+    public class Product : BaseAuditableEntity<int>
     {
         public required string Name { get; set; }
         public required string NormalizedName { get; set; }

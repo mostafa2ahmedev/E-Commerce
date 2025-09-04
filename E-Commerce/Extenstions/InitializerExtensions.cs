@@ -1,4 +1,4 @@
-﻿using E_Commerce.Domain.Contracts.Persistence;
+﻿using E_Commerce.Domain.Contracts.Persistence.DbInitializer;
 
 namespace E_Commerce.Extensions
 {
@@ -11,6 +11,7 @@ namespace E_Commerce.Extensions
             var services = scope.ServiceProvider;
 
             var storeContextInitializer = services.GetRequiredService<IStoreContextInitializer>();
+            var storeIdentityContextInitializer = services.GetRequiredService<IStoreIdentityInitializer>();
             var loggerFactory = services.GetRequiredService<ILoggerFactory>();
 
 
@@ -19,6 +20,10 @@ namespace E_Commerce.Extensions
             {
                 await storeContextInitializer.InitializeAsync();
                 await storeContextInitializer.SeedAsync();
+
+
+                await storeIdentityContextInitializer.InitializeAsync();
+                await storeIdentityContextInitializer.SeedAsync();
             }
             catch (Exception ex)
             {

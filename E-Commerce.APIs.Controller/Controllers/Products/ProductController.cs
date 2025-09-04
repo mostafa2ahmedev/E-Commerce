@@ -1,14 +1,11 @@
-﻿using E_Commerce.APIs.Controller.Errors;
-using E_Commerce.Application.Services.Common;
+﻿using E_Commerce.Application.Services.Common;
 using E_Commerce.Application.Services.Contracts;
 using E_Commerce.Application.Services.DTO.Products;
 using E_Commerce.Controllers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 
 namespace E_Commerce.APIs.Controller.Controllers.Products
@@ -25,7 +22,7 @@ namespace E_Commerce.APIs.Controller.Controllers.Products
 
 
         [HttpGet]
-
+        [Authorize(AuthenticationSchemes = "Identity.Application")]
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery]ProductSpecParams productSpecParams) {
 
             var products = await _serviceManager.ProductService.GetProductsAsync(productSpecParams);

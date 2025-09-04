@@ -2,13 +2,14 @@
 using E_Commerce.Domain.Contracts;
 using E_Commerce.Domain.Contracts.Persistence;
 using E_Commerce.Domain.Entities.Products;
+using E_Commerce.Persistence.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Commerce.Persistence.Data.GenericRepository
+namespace E_Commerce.Persistence.GenericRepository
 {
     internal class GenericRepository<TEntity, TKey> : IGenericRepository<TEntity, TKey>
         where TEntity : BaseEntity<TKey>

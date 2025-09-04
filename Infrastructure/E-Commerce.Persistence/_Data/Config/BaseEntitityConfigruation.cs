@@ -15,9 +15,6 @@ namespace E_Commerce.Persistence.Data.Config
         {
             builder.Property(E => E.Id).ValueGeneratedOnAdd();
 
-            builder.Property(E => E.CreatedBy)
-                .IsRequired();
-            //.HasDefaultValueSql("GetUTCDate");
 
         }
     }

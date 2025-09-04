@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Domain.Entities.Products;
+using E_Commerce.Persistence._Data.Config;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Persistence.Data.Config.Products
 {
-    internal class ProductConfigurations : BaseEntityConfiguration<Product,int>, IEntityTypeConfiguration<Product>
+    internal class ProductConfigurations : BaseAuditableEntityConfigurations<Product,int>
     {
-        public void Configure(EntityTypeBuilder<Product> builder)
+        public override void Configure(EntityTypeBuilder<Product> builder)
         {
-         base.Configure(builder);
+            base.Configure(builder);
 
 
             builder.Property(P => P.Name).IsRequired().HasMaxLength(100);

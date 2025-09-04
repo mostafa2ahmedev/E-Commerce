@@ -115,6 +115,14 @@ namespace E_Commerce.MiddleWares
 
                     await httpContext.Response.WriteAsync(response.ToString());
                     break;
+                 case ValidationException exception: // Bad Request
+                    httpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    httpContext.Response.ContentType = "application/json";
+                    response = new ApiAuthValidationResponse() {Errors = exception.Errors};
+
+                    await httpContext.Response.WriteAsync(response.ToString());
+                    break;
+
                 case BadRequestException: // Bad Request
                     httpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     httpContext.Response.ContentType = "application/json";
@@ -122,6 +130,14 @@ namespace E_Commerce.MiddleWares
 
                     await httpContext.Response.WriteAsync(response.ToString());
                     break;
+                case UnAuthorizedException: // Bad Request
+                    httpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                    httpContext.Response.ContentType = "application/json";
+                    response = new ApiResponse((int)HttpStatusCode.Unauthorized);
+
+                    await httpContext.Response.WriteAsync(response.ToString());
+                    break;
+              
 
             }
         }

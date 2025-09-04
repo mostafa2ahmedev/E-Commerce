@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Domain.Entities.Products;
+using E_Commerce.Persistence._Data.Config;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
@@ -8,14 +9,15 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Persistence.Data.Config.Products
 {
-    internal class CategoryConfigurations :BaseEntityConfiguration<ProductCategory,int>
+
+    internal class BrandConfigurations : BaseAuditableEntityConfigurations<ProductBrand, int>
     {
 
-        public override void Configure(EntityTypeBuilder<ProductCategory> builder)
+        public override void Configure(EntityTypeBuilder<ProductBrand> builder)
         {
             base.Configure(builder);
 
-            builder.Property(C => C.Name).IsRequired();
+            builder.Property(B => B.Name).IsRequired();
         }
     }
 }

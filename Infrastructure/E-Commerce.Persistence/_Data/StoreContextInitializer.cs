@@ -1,5 +1,6 @@
-﻿using E_Commerce.Domain.Contracts.Persistence;
+﻿using E_Commerce.Domain.Contracts.Persistence.DbInitializer;
 using E_Commerce.Domain.Entities.Products;
+using E_Commerce.Persistence.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +10,16 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Persistence.Data
 {
-    internal class StoreContextInitializer(StoreDbContext _storeDbContext) : IStoreContextInitializer
+    internal class StoreContextInitializer: DbInitializer, IStoreContextInitializer
     {
+        private readonly StoreDbContext _storeDbContext;
 
-        public async Task InitializeAsync()
+        public StoreContextInitializer(StoreDbContext storeDbContext) : base(storeDbContext)
         {
-            var pendingMigrations = await _storeDbContext.Database.GetPendingMigrationsAsync();
-            if (pendingMigrations.Any())
-                await _storeDbContext.Database.MigrateAsync();
-
-       
+            _storeDbContext = storeDbContext;
         }
 
-        public async Task SeedAsync()
+        public override async Task SeedAsync()
         {
             if (!_storeDbContext.ProductBrands.Any())
             {

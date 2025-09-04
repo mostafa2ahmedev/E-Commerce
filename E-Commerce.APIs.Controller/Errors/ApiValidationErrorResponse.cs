@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace E_Commerce.APIs.Controller.Errors
 {
     public class ApiValidationErrorResponse : ApiResponse
@@ -16,7 +15,6 @@ namespace E_Commerce.APIs.Controller.Errors
         }
 
 
-
         public class ValidationError
         {
             public required string Field { get; set; }
@@ -25,7 +23,9 @@ namespace E_Commerce.APIs.Controller.Errors
         }
 
 
+
+
     }
 
-  
 }
+

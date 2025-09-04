@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Commerce.Persistence.Data.GenericRepository
+namespace E_Commerce.Persistence.GenericRepository
 {
     internal static class SpecificationEvaluator <TEntity,TKey>
         where TEntity : BaseEntity<TKey>

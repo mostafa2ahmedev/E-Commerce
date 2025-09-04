@@ -1,13 +1,14 @@
-using E_Commerce.Extensions;
-using E_Commerce.Persistence;
-using Microsoft.Extensions.DependencyInjection;
-using E_Commerce.APIs.Controller;
-using E_Commerce.Application;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 using E_Commerce.APIs.Controller.Errors;
-using E_Commerce.MiddleWares;
+using E_Commerce.Application;
+using E_Commerce.Domain.Entities.Identity;
+using E_Commerce.Extensions;
 using E_Commerce.Infrastructure;
+using E_Commerce.MiddleWares;
+using E_Commerce.Persistence;
+using E_Commerce.Persistence.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce
 {
@@ -52,13 +53,20 @@ namespace E_Commerce
             
             }).AddApplicationPart(typeof(APIs.Controller.AssemblyInformation).Assembly);
 
+            
+
+
+
 
 
             builder.Services.Configure<ApiBehaviorOptions>(builder.Configuration);
-
             builder.Services.AddPersistenceServices(builder.Configuration);
             builder.Services.AddApplicationServices();
             builder.Services.AddInfrastructureServices(builder.Configuration);
+            builder.Services.AddIdentityServices(builder.Configuration);
+
+
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -87,6 +95,7 @@ namespace E_Commerce
             app.UseStaticFiles();
 
             app.UseHttpsRedirection();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

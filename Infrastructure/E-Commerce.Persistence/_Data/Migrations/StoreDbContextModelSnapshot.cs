@@ -79,7 +79,7 @@ namespace E_Commerce.Persistence.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Domain.Entities.Products.ProductBrand", b =>
@@ -110,7 +110,7 @@ namespace E_Commerce.Persistence.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductBrands");
+                    b.ToTable("ProductBrands", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Domain.Entities.Products.ProductCategory", b =>
@@ -141,7 +141,7 @@ namespace E_Commerce.Persistence.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductCategories");
+                    b.ToTable("ProductCategories", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Domain.Entities.Products.Product", b =>
