@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace E_Commerce.Persistence.Data.Migrations
+namespace E_Commerce.Persistence._Data.Migrations
 {
     /// <inheritdoc />
     public partial class NormalizedNameColumn : Migration

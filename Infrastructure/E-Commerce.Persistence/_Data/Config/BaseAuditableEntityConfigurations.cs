@@ -1,5 +1,5 @@
 ﻿using E_Commerce.Domain.Common;
-using E_Commerce.Persistence.Data.Config;
+using E_Commerce.Persistence._Data.Config;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;

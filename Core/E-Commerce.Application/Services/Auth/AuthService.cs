@@ -1,6 +1,7 @@
-﻿using E_Commerce.Application.Common.Exceptions;
-using E_Commerce.Application.Services.Contracts.Authentication;
+﻿using E_Commerce.Application.Services.Contracts.Authentication;
 using E_Commerce.Application.Services.DTO.Authentication;
+using E_Commerce.Application.Common.Exceptions;
+
 using E_Commerce.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +9,11 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Http;
+using E_Commerce.Application.Services.DTO.Common;
+using AutoMapper;
+using E_Commerce.Application.Extensions;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 
 namespace E_Commerce.Application.Services.Authentication
@@ -16,18 +22,75 @@ namespace E_Commerce.Application.Services.Authentication
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
 
-        public AuthService(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager,
+        public AuthService(UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            IMapper mapper,
             IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _mapper = mapper;
             _configuration = configuration;
         }
 
+        public async Task<UserResultDto> GetCurrentUser(ClaimsPrincipal claimsPrincipal)
+        {
+            var email = claimsPrincipal.FindFirstValue(ClaimTypes.Email);
+
+            var user = await _userManager.FindByEmailAsync(email!);
+            //var user = await _userManager.FindUserWithAddress(claimsPrincipal);
+            return new UserResultDto()
+            {
+                Id = user!.Id,
+                DisplayName = user.DisplayName,
+                Email = user.Email!,
+                Token = await CreateTokenAsync(user)
 
 
+            };
+        }
+
+        public async Task<AddressDto?> GetUserAddress(ClaimsPrincipal claimsPrincipal)
+        {
+            var email = claimsPrincipal.FindFirstValue(ClaimTypes.Email);
+
+            var user = await _userManager.FindUserWithAddress(claimsPrincipal);
+
+            var address = _mapper.Map<AddressDto>(user!.Address);
+
+            return address;
+
+        }
+        public async Task<AddressDto> UpdateUserAddress(ClaimsPrincipal claimsPrincipal,AddressDto addressDto)
+        {
+            //   var address = _mapper.Map<Address>(addressDto);
+            //   var user = await _userManager.FindUserWithAddress(claimsPrincipal);
+
+            //   user.Address = address;
+
+            //await   _userManager.UpdateAsync(user);
+
+            var updatedAddress = _mapper.Map<Address>(addressDto);
+            var user = await _userManager.FindUserWithAddress(claimsPrincipal);
+
+
+            if(user.Address is not null)
+                updatedAddress.Id = user.Address.Id;
+
+            user.Address = updatedAddress;
+            var result=  await _userManager.UpdateAsync(user);
+
+            if (!result.Succeeded) throw new 
+                    BadRequestException(result.Errors.Select(error=>error.Description).Aggregate((x,y)=>$"{x}, {y}"));
+            return addressDto;
+        }
+        public async Task<bool> EmailExists(string email)
+        {
+            return await _userManager.FindByEmailAsync(email!) is not null;
+        }
 
 
         public async Task<UserResultDto> Login(LoginDto loginDto)
@@ -65,6 +128,8 @@ namespace E_Commerce.Application.Services.Authentication
 
         public async Task<UserResultDto> Register(RegisterDto registerDto)
         {
+            //if (EmailExists(registerDto.Email).Result)
+            //    throw new BadRequestException("This email is already Used");
             var user = new ApplicationUser() {
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
@@ -90,6 +155,7 @@ namespace E_Commerce.Application.Services.Authentication
 
             };
         }
+
 
         private async Task<string> CreateTokenAsync(ApplicationUser user)
         {
@@ -121,11 +187,15 @@ namespace E_Commerce.Application.Services.Authentication
                 audience: _configuration.GetSection("JWT")["ValidAudience"],
                 issuer: _configuration.GetSection("JWT")["ValidIssuer"],
                 expires: DateTime.Now.AddMinutes(double.Parse(_configuration.GetSection("JWT")["DurationInMinutes"] ?? "0")),
-                signingCredentials: new SigningCredentials(authKey, SecurityAlgorithms.HmacSha256)
+                signingCredentials: new SigningCredentials(authKey, SecurityAlgorithms.HmacSha256),
+                claims :authClaims
+                
                 );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
 
         }
+
+  
     }
 }

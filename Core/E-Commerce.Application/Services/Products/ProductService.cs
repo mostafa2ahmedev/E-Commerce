@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
-using E_Commerce.Application.Common.Exceptions;
 using E_Commerce.Application.Services.Common;
 using E_Commerce.Application.Services.Contracts.Products;
 using E_Commerce.Application.Services.DTO.Products;
+using E_Commerce.Application.Common.Exceptions;
+
 using E_Commerce.Domain.Contracts.Persistence;
 using E_Commerce.Domain.Contracts.Specifications;
 using E_Commerce.Domain.Contracts.Specifications.Products;

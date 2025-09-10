@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
-using E_Commerce.Application.Services.Authentication;
-using E_Commerce.Application.Services.Basket;
 using E_Commerce.Application.Services.Contracts;
 using E_Commerce.Application.Services.Contracts.Authentication;
 using E_Commerce.Application.Services.Contracts.Basket;
 using E_Commerce.Application.Services.Contracts.Products;
+using E_Commerce.Application.Services.Authentication;
+using E_Commerce.Application.Services.Basket;
+
 using E_Commerce.Application.Services.Products;
 using E_Commerce.Domain.Contracts.Infrastructure;
 using E_Commerce.Domain.Contracts.Persistence;
@@ -16,26 +17,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using E_Commerce.Application.Services.Contracts.Order;
 
 namespace E_Commerce.Application.Services
 {
     internal class ServiceManager : IServiceManager
     {
-        public readonly Lazy<IProductService> _productService;
-        public readonly Lazy<IBasketService> _basketService;
-        public readonly Lazy<IAuthService> _authService;
+        private readonly Lazy<IProductService> _productService;
+        private readonly Lazy<IBasketService> _basketService;
+        private readonly Lazy<IAuthService> _authService;
+        private readonly Lazy<IOrderService> _orderService;
         public IProductService ProductService => _productService.Value;
 
         public IBasketService BasketService => _basketService.Value;
 
         public IAuthService AuthService => _authService.Value;
+
+        public IOrderService OrderService => _orderService.Value;
+
         public ServiceManager(IUnitOfWork unitOfWork,IMapper mapper,IConfiguration configuration
             , Func<IBasketService> basketServiceFactory,
-             Func<IAuthService> authServiceFactory)
+             Func<IAuthService> authServiceFactory,
+               Func<IOrderService> OrderServiceFactory)
         {
             _productService = new Lazy<IProductService>(() => new ProductService(unitOfWork, mapper));
             _basketService = new Lazy<IBasketService>(basketServiceFactory,true);
             _authService = new Lazy<IAuthService>(authServiceFactory,true);
+            _orderService = new Lazy<IOrderService>(OrderServiceFactory, true);
         }
     }
 }

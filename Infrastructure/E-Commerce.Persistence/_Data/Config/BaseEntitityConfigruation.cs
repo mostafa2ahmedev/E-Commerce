@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Commerce.Persistence.Data.Config
+namespace E_Commerce.Persistence._Data.Config
 {
     internal class BaseEntityConfiguration<TEntity, TKey> : IEntityTypeConfiguration<TEntity>
                where TEntity : BaseEntity<TKey> where TKey : IEquatable<TKey>

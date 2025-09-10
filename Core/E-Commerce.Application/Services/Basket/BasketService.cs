@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
-using E_Commerce.Application.Common.Exceptions;
 using E_Commerce.Application.Services.Contracts.Basket;
 using E_Commerce.Application.Services.DTO.Basket;
+using E_Commerce.Application.Common.Exceptions;
+
 using E_Commerce.Domain.Contracts.Infrastructure;
 using E_Commerce.Domain.Entities.Basket;
 using System;

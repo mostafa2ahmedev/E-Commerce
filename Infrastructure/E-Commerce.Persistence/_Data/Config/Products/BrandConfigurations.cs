@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Commerce.Persistence.Data.Config.Products
+namespace E_Commerce.Persistence._Data.Config.Products
 {
 
     internal class BrandConfigurations : BaseAuditableEntityConfigurations<ProductBrand, int>

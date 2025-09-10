@@ -2,6 +2,7 @@
 using E_Commerce.Domain.Contracts.Persistence;
 using E_Commerce.Domain.Contracts.Persistence.DbInitializer;
 using E_Commerce.Domain.Entities.Identity;
+using E_Commerce.Persistence._Data.Interceptor;
 using E_Commerce.Persistence.Data;
 using E_Commerce.Persistence.Identity;
 using E_Commerce.Persistence.UnitOfWorks;
@@ -20,8 +21,11 @@ namespace E_Commerce.Persistence
                 options.UseLazyLoadingProxies().UseSqlServer(configuration.GetConnectionString("StoreContext"));
 
             });
-            services.AddDbContext<StoreIdentityDbContext>(options => {
-                options.UseLazyLoadingProxies().UseSqlServer(configuration.GetConnectionString("IdentityContext"));
+            services.AddDbContext<StoreIdentityDbContext>((serviceProvider,options) => {
+                options
+                .UseLazyLoadingProxies()
+                .UseSqlServer(configuration.GetConnectionString("IdentityContext"))
+                .AddInterceptors(serviceProvider.GetRequiredService<AuditInterceptor>());
 
             });
 
@@ -31,6 +35,7 @@ namespace E_Commerce.Persistence
             //services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             services.AddScoped(typeof(IStoreContextInitializer), typeof(StoreContextInitializer));
+            services.AddScoped(typeof(AuditInterceptor));
             services.AddScoped(typeof(IStoreIdentityInitializer), typeof(StoreIdentityInitializer));
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
   

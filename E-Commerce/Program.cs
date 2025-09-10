@@ -1,5 +1,7 @@
 using E_Commerce.APIs.Controller.Errors;
+using E_Commerce.APIs.Controller.Services;
 using E_Commerce.Application;
+using E_Commerce.Application.Services;
 using E_Commerce.Domain.Entities.Identity;
 using E_Commerce.Extensions;
 using E_Commerce.Infrastructure;
@@ -53,12 +55,13 @@ namespace E_Commerce
             
             }).AddApplicationPart(typeof(APIs.Controller.AssemblyInformation).Assembly);
 
-            
 
 
 
 
 
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddScoped(typeof(ILoggedInUserService), typeof(LoggedInUserService));
             builder.Services.Configure<ApiBehaviorOptions>(builder.Configuration);
             builder.Services.AddPersistenceServices(builder.Configuration);
             builder.Services.AddApplicationServices();

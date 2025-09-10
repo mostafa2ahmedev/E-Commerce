@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Domain.Contracts.Persistence.DbInitializer;
+using E_Commerce.Domain.Entities.Orders;
 using E_Commerce.Domain.Entities.Products;
 using E_Commerce.Persistence.Common;
 using System;
@@ -23,7 +24,7 @@ namespace E_Commerce.Persistence.Data
         {
             if (!_storeDbContext.ProductBrands.Any())
             {
-                var brandsData = await File.ReadAllTextAsync("../Infrastructure/E-Commerce.Persistence/Data/Seeds/brands.json");
+                var brandsData = await File.ReadAllTextAsync("../Infrastructure/E-Commerce.Persistence/_Data/Seeds/brands.json");
 
 
 
@@ -45,7 +46,7 @@ namespace E_Commerce.Persistence.Data
             }
             if (!_storeDbContext.ProductCategories.Any())
             {
-                var categoriesData = await File.ReadAllTextAsync("../Infrastructure/E-Commerce.Persistence/Data/Seeds/types.json");
+                var categoriesData = await File.ReadAllTextAsync("../Infrastructure/E-Commerce.Persistence/_Data/Seeds/types.json");
 
 
 
@@ -67,7 +68,7 @@ namespace E_Commerce.Persistence.Data
             }
             if (!_storeDbContext.Products.Any())
             {
-                var productsData = await File.ReadAllTextAsync("../Infrastructure/E-Commerce.Persistence/Data/Seeds/products.json");
+                var productsData = await File.ReadAllTextAsync("../Infrastructure/E-Commerce.Persistence/_Data/Seeds/products.json");
 
 
 
@@ -80,6 +81,28 @@ namespace E_Commerce.Persistence.Data
                     foreach (var product in products)
                     {
                         await _storeDbContext.Products.AddAsync(product);
+
+                    }
+                    await _storeDbContext.SaveChangesAsync();
+                }
+
+
+            }
+            if (!_storeDbContext.DeliveryMethods.Any())
+            {
+                var methodsData = await File.ReadAllTextAsync("../Infrastructure/E-Commerce.Persistence/_Data/Seeds/delivery.json");
+
+
+
+
+                var methods = JsonSerializer.Deserialize<List<DeliveryMethod>>(methodsData);
+
+                if (methods?.Count > 0)
+                {
+
+                    foreach (var method in methods)
+                    {
+                        await _storeDbContext.DeliveryMethods.AddAsync(method);
 
                     }
                     await _storeDbContext.SaveChangesAsync();

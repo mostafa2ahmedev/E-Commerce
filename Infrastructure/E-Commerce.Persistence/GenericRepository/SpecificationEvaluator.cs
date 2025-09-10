@@ -25,8 +25,8 @@ namespace E_Commerce.Persistence.GenericRepository
             // Order By
             if (spec.OrderByDesc is not null)
                 query = query.OrderByDescending(spec.OrderByDesc);
-            else
-                query = query.OrderBy(spec.OrderBy!);
+            else if (spec.OrderBy is not null)
+                query = query.OrderBy(spec.OrderBy);
 
 
 

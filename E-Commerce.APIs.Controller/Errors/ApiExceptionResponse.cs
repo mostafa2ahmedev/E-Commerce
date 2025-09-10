@@ -17,7 +17,10 @@ namespace E_Commerce.APIs.Controller.Errors
         {
             Details = details;
         }
+        public override string ToString()
+        {
+            return JsonSerializer.Serialize(this, new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+        }
 
-      
     }
 }

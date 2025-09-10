@@ -1,6 +1,7 @@
 ﻿using E_Commerce.Application.Services.Common;
 using E_Commerce.Application.Services.Contracts;
 using E_Commerce.Application.Services.DTO.Products;
+
 using E_Commerce.Controllers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -22,7 +23,7 @@ namespace E_Commerce.APIs.Controller.Controllers.Products
 
 
         [HttpGet]
-        [Authorize(AuthenticationSchemes = "Identity.Application")]
+        [Authorize]
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery]ProductSpecParams productSpecParams) {
 
             var products = await _serviceManager.ProductService.GetProductsAsync(productSpecParams);

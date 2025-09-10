@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace E_Commerce.Persistence.Data.Migrations
+namespace E_Commerce.Persistence._Data.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
     [Migration("20250826221721_NormalizedNameColumn")]

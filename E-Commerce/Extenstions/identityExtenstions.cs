@@ -1,5 +1,5 @@
-﻿using E_Commerce.Application.Services.Authentication;
-using E_Commerce.Application.Services.Contracts.Authentication;
+﻿using E_Commerce.Application.Services.Contracts.Authentication;
+using E_Commerce.Application.Services.Authentication;
 using E_Commerce.Domain.Contracts.Persistence.DbInitializer;
 using E_Commerce.Domain.Entities.Identity;
 using E_Commerce.Persistence.Identity;

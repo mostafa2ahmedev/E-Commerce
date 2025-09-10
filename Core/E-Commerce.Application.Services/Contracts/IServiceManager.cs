@@ -1,11 +1,11 @@
-﻿using E_Commerce.Application.Services.Contracts.Authentication;
+﻿
+
+
+
+using E_Commerce.Application.Services.Contracts.Authentication;
 using E_Commerce.Application.Services.Contracts.Basket;
+using E_Commerce.Application.Services.Contracts.Order;
 using E_Commerce.Application.Services.Contracts.Products;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace E_Commerce.Application.Services.Contracts
 {
@@ -14,5 +14,6 @@ namespace E_Commerce.Application.Services.Contracts
         IProductService ProductService { get; }
         IBasketService BasketService { get; }
         IAuthService AuthService { get; }
+        IOrderService OrderService { get; }
     }
 }
