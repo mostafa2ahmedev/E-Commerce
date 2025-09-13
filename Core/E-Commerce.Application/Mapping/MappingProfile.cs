@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using E_Commerce.Application.Services.DTO.Basket;
 using E_Commerce.Application.Services.DTO.Common;
 using E_Commerce.Application.Services.DTO.Order;
 using E_Commerce.Application.Services.DTO.Products;
@@ -15,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UserAddress = E_Commerce.Domain.Entities.Identity.Address;
 using OrderAddress = E_Commerce.Domain.Entities.Orders.Address;
+using E_Commerce.Shared.DTO.Basket;
 namespace E_Commerce.Application.Mapping
 {
     internal class MappingProfile : Profile

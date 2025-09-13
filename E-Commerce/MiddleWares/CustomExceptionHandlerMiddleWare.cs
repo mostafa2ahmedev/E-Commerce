@@ -55,9 +55,11 @@ namespace E_Commerce.MiddleWares
             {
                 if (_env.IsDevelopment())
                 {
-                    _logger.LogError(ex, ex.Message);
+                  
 
-                 
+                    _logger.LogError(ex, ex.Message);
+               
+
 
                 }
                 else

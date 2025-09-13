@@ -17,15 +17,18 @@ namespace E_Commerce.Persistence
     {
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<StoreDbContext>(options => {
-                options.UseLazyLoadingProxies().UseSqlServer(configuration.GetConnectionString("StoreContext"));
-
-            });
-            services.AddDbContext<StoreIdentityDbContext>((serviceProvider,options) => {
+            services.AddDbContext<StoreDbContext>((serviceProvider, options) => {
                 options
                 .UseLazyLoadingProxies()
-                .UseSqlServer(configuration.GetConnectionString("IdentityContext"))
+                .UseSqlServer(configuration.GetConnectionString("StoreContext"))
                 .AddInterceptors(serviceProvider.GetRequiredService<AuditInterceptor>());
+
+            }); 
+            services.AddDbContext<StoreIdentityDbContext>((options) => {
+                 options
+                .UseLazyLoadingProxies()
+                .UseSqlServer(configuration.GetConnectionString("IdentityContext"));
+      
 
             });
 

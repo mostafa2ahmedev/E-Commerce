@@ -55,7 +55,16 @@ namespace E_Commerce
             
             }).AddApplicationPart(typeof(APIs.Controller.AssemblyInformation).Assembly);
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("Default", policyBuilder => {
+                    policyBuilder.AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .WithOrigins(builder.Configuration.GetSection("Urls")["FrontBaseUrl"]!);
+                });
 
+
+            });
 
 
 
@@ -96,7 +105,7 @@ namespace E_Commerce
             }
 
             app.UseStaticFiles();
-
+            app.UseCors("Default");
             app.UseHttpsRedirection();
             app.UseAuthentication();
 

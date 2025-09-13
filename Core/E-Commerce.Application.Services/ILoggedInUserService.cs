@@ -10,7 +10,7 @@ namespace E_Commerce.Application.Services
     {
 
 
-        public string? UserId { get; }
+        public string? UserId { get; set; }
 
         
     }

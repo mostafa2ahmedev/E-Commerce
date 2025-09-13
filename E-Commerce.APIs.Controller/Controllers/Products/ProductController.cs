@@ -1,4 +1,5 @@
-﻿using E_Commerce.Application.Services.Common;
+﻿using E_Commerce.APIs.Controller.Filters;
+using E_Commerce.Application.Services.Common;
 using E_Commerce.Application.Services.Contracts;
 using E_Commerce.Application.Services.DTO.Products;
 
@@ -23,7 +24,8 @@ namespace E_Commerce.APIs.Controller.Controllers.Products
 
 
         [HttpGet]
-        [Authorize]
+        [Cached(600)]
+       
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery]ProductSpecParams productSpecParams) {
 
             var products = await _serviceManager.ProductService.GetProductsAsync(productSpecParams);

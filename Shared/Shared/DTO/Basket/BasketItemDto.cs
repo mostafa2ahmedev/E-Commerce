@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Commerce.Application.Services.DTO.Basket
+namespace E_Commerce.Shared.DTO.Basket
 {
     public class BasketItemDto
     {

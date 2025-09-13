@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using E_Commerce.Application.Services.Contracts.Basket;
-using E_Commerce.Application.Services.DTO.Basket;
+
+
 using E_Commerce.Application.Common.Exceptions;
 
 using E_Commerce.Domain.Contracts.Infrastructure;
@@ -10,8 +10,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using E_Commerce.Shared.DTO.Basket;
+using E_Commerce.Application.Services.Common.Contracts.Infrastructure;
 
-namespace E_Commerce.Application.Services.Basket
+namespace E_Commerce.Infrastructure.BasketServices
 {
     internal class BasketService : IBasketService
     {

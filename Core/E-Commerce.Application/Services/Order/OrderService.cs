@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using E_Commerce.Application.Common.Exceptions;
-using E_Commerce.Application.Services.Contracts.Basket;
+using E_Commerce.Application.Services.Common.Contracts.Infrastructure;
 using E_Commerce.Application.Services.Contracts.Order;
 using E_Commerce.Application.Services.DTO.Order;
+using E_Commerce.Domain.Contracts.Infrastructure;
 using E_Commerce.Domain.Contracts.Persistence;
 using E_Commerce.Domain.Contracts.Specifications.Orders;
 using E_Commerce.Domain.Entities.Orders;
@@ -15,12 +16,14 @@ namespace E_Commerce.Application.Services.Order
         private readonly IBasketService _basketService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IPaymentService _paymentService;
 
-        public OrderService(IBasketService basketService,IUnitOfWork unitOfWork,IMapper mapper  )
+        public OrderService(IBasketService basketService,IUnitOfWork unitOfWork,IMapper mapper,IPaymentService paymentService  )
         {
             _basketService = basketService;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _paymentService = paymentService;
         }
         public async Task<OrderToReturnDto> CreateOrderAsync(string buyerEmail, OrderToCreateDto order)
         {
@@ -59,7 +62,16 @@ namespace E_Commerce.Application.Services.Order
             //Get DeliveryMethod 
             var method = await _unitOfWork.GetRepository<DeliveryMethod, int>().GetAsync(order.DeliveryMethodId);
 
-            //4. Create Order with Order Items
+            //4. Create Order with Order Items with checking for the payment intent id first
+            var orderRepo = _unitOfWork.GetRepository<Domain.Entities.Orders.Order, int>();
+            var orderSpec = new OrderByPaymentIntentSpecifications(basket.PaymentIntentId!);
+            var existingOrder = await orderRepo.GetAsyncWithSpec(orderSpec);
+
+            if (existingOrder is not null) {
+                orderRepo.Delete(existingOrder);
+                await _paymentService.CreateOrUpdatePaymentIntent(basket.Id);
+
+            }
             var ordertToCreate = new Domain.Entities.Orders.Order() {
                   BuyerEmail = buyerEmail,
                   ShippingAddress = _mapper.Map<Address>(order.AddressDto),
@@ -67,6 +79,7 @@ namespace E_Commerce.Application.Services.Order
                   DeliveryMethod = method,
                   Items = orderItems,
                   SubTotal = subTotal,
+                  PaymentIntentId =  basket.PaymentIntentId!
             };
             await _unitOfWork.GetRepository<Domain.Entities.Orders.Order, int>().AddAsync(ordertToCreate);
 

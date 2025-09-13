@@ -23,6 +23,6 @@ namespace E_Commerce.Application.Services.DTO.Order
         public decimal SubTotal { get; set; }
         public decimal Total { get; set; }
 
-        public string PaymentIntentId { get; set; } = "";
+        public string PaymentIntentId { get; set; } =null!;
     }
 }

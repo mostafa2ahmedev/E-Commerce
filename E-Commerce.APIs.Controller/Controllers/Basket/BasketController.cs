@@ -1,7 +1,8 @@
 ﻿
+using E_Commerce.Application.Services.Common.Contracts.Infrastructure;
 using E_Commerce.Application.Services.Contracts;
-using E_Commerce.Application.Services.DTO.Basket;
 using E_Commerce.Controllers;
+using E_Commerce.Shared.DTO.Basket;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,17 +15,17 @@ namespace E_Commerce.APIs.Controller.Controllers.Basket
 {
     public class BasketController : BaseApiController
     {
-        private readonly IServiceManager _serviceManager;
+        private readonly IBasketService _basketService;
 
-        public BasketController(IServiceManager serviceManager)
+        public BasketController(IBasketService basketService)
         {
-            _serviceManager = serviceManager;
+            _basketService = basketService;
         }
 
         [HttpGet]
 
         public async Task<ActionResult<CustomerBasketDto>> GetBasket(string id) { 
-            var basket = await _serviceManager.BasketService.GetCustomerBasketAsync(id);
+            var basket = await _basketService.GetCustomerBasketAsync(id);
 
 
             return Ok(basket);
@@ -33,7 +34,7 @@ namespace E_Commerce.APIs.Controller.Controllers.Basket
 
         public async Task<ActionResult<CustomerBasketDto>> UpdateBasket(CustomerBasketDto customerBasketDto)
         {
-            var basket = await _serviceManager.BasketService.UpdateCustomerBasketAsync(customerBasketDto);
+            var basket = await _basketService.UpdateCustomerBasketAsync(customerBasketDto);
 
 
             return Ok(basket);
@@ -42,7 +43,7 @@ namespace E_Commerce.APIs.Controller.Controllers.Basket
 
         public async Task DeleteBasket(string id)
         {
-             await _serviceManager.BasketService.DeleteCustomerBasketAsync(id);
+             await _basketService.DeleteCustomerBasketAsync(id);
 
 
             

@@ -33,11 +33,17 @@ namespace E_Commerce.Persistence._Data.Interceptor
         }
 
         private void UpdateEntities(DbContext? dbContext) {
+            if (dbContext == null) return;
+
+
             foreach (var entry in dbContext!.ChangeTracker.Entries<IBaseAuditableEntity>()
                 .Where(entry => entry.State is EntityState.Added or EntityState.Modified))
             {
                 //if (entry.Entity is Order or OrderItem)
                 //    _loggedInUserService.UserId = "";
+
+                if (!string.IsNullOrEmpty(_loggedInUserService?.UserId))
+                    _loggedInUserService.UserId = "Admin";
 
                 if (entry.State is EntityState.Added)
                 {
@@ -46,7 +52,7 @@ namespace E_Commerce.Persistence._Data.Interceptor
                     entry.Entity.CreatedBy = _loggedInUserService?.UserId!;
                 }
                 entry.Entity.LastModifiedOn = DateTime.UtcNow;
-                entry.Entity.LastModifiedBy = _loggedInUserService?.UserId!;
+                entry.Entity.LastModifiedBy = _loggedInUserService?.UserId! ;
             }
 
         }

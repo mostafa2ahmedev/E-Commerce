@@ -1,6 +1,10 @@
-﻿using E_Commerce.Domain.Contracts.Infrastructure;
+﻿using E_Commerce.Application.Services.Common.Contracts.Infrastructure;
+using E_Commerce.Domain.Contracts.Infrastructure;
 
 using E_Commerce.Infrastructure.BasketRepositoryy;
+using E_Commerce.Infrastructure.BasketServices;
+using E_Commerce.Infrastructure.CacheServices;
+using E_Commerce.Infrastructure.PaymentServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
@@ -22,6 +26,9 @@ namespace E_Commerce.Infrastructure
             
             });
             services.AddScoped(typeof(IBasketRepository),typeof(BasketRepository));
+            services.AddScoped(typeof(IPaymentService), typeof(PaymentService));
+            services.AddSingleton(typeof(IResponseCacheService), typeof(CacheService));
+            services.AddScoped(typeof(IBasketService), typeof(BasketService));
             return services;
 
         }
